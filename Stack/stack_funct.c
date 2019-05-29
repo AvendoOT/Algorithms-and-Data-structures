@@ -33,7 +33,7 @@ int stack_push(Stack* mystack, int element) {
 	}
 	mystack->location++;
 	mystack->map[mystack->location] = element; // pushing element into stack
-	printf("Dodano %d\n", element);
+	printf("Push: %d\n", element);
 	printf("Peek %d\n", mystack->location);
 	return 1;
 }
@@ -44,7 +44,7 @@ int stack_pop(Stack *mystack, int* element) {
 	}
 	*element = mystack->map[mystack->location];
 	mystack->location--;
-	printf("Skinuto %d\n", *element);
+	printf("Pop: %d\n", *element);
 	printf("Peek %d\n", mystack->location);
 	return 1;
 }
@@ -56,4 +56,25 @@ int peek_find(Stack *mystack, int *element) {
 	stack_push(mystack, *element);
 	printf("Peek %d\n", mystack->location);
 	return 1;
+}
+
+int find_specific(Stack *mystack, int *element, int indeks) {
+	Stack proxy;
+	stack_init(&proxy, mystack->size);
+	int i=0,j;
+	int found = 0;
+	while (stack_pop(mystack, &j)) {
+		stack_push(&proxy, j);
+		i++;
+		if (i == indeks) {
+			*element = j;
+			found = 1;
+			printf(" Found peek: %d\n", proxy.location);
+			break;
+		}
+	}
+	while (stack_pop(&proxy, &j)) {
+		stack_push(mystack, j);
+	}
+	return found;
 }
