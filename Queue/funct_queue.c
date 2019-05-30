@@ -24,10 +24,12 @@ int queue_add(double input, Queue *myqueue) {
 		if (myqueue->in == NULL) {
 			myqueue->in = proxy;
 			myqueue->out = proxy;
+			printf("%.2lf", myqueue->in->element);
 		}
 		else {
 			myqueue->in->next = proxy;
 			myqueue->in = proxy;
+			printf("%.2lf", myqueue->in->element);
 		}
 		return 1;
 	}
